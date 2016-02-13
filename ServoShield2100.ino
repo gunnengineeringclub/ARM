@@ -22,13 +22,27 @@ void setup() {
 void loop() {
   if(Serial.available())
   {
-    String first  = Serial.readStringUntil(',');
+    String zero  = Serial.readStringUntil(',');
     Serial.read(); //next character is comma, so skip it using this
-    String second = Serial.readStringUntil(',');
-    Serial.print(first);
-    Serial.println();
-    Serial.print(second);
-    setDegree(first.toInt(),second.toInt());
+    String one  = Serial.readStringUntil(',');
+    Serial.read(); //next character is comma, so skip it using this
+    String two = Serial.readStringUntil(',');
+    Serial.read(); //next character is comma, so skip it using this
+    String three  = Serial.readStringUntil(',');
+    Serial.read(); //next character is comma, so skip it using this
+    String four = Serial.readStringUntil(',');
+    Serial.read(); //next character is comma, so skip it using this
+    String five  = Serial.readStringUntil(',');
+    Serial.read(); //next character is comma, so skip it using this
+    
+    setDegree(0,zero.toInt());
+    setDegree(1,one.toInt());
+    setDegree(2,two.toInt());
+    setDegree(3,three.toInt());
+    setDegree(4,four.toInt());
+    setDegree(5,five.toInt());
+
+    Serial.print("got something");
   }
 }
 
@@ -38,11 +52,11 @@ void setDegree(int servo, int degree)
   if(servo == 0)
     servos.setposition(0,map(degree,0,1000,2600,700));
   if(servo == 1)
-    servos.setposition(1,map(degree,0,1000,1500,700));
+    servos.setposition(1,map(degree,0,1000,700,1500));
   if(servo == 2)
-    servos.setposition(2,map(degree,0,1000,700,1500));
+    servos.setposition(2,map(degree,0,1000,2300,700));
   if(servo == 3)
-    servos.setposition(3,map(degree,0,1000,1500,600));
+    servos.setposition(3,map(degree,0,1000,600,2500));
   if(servo == 4)
     servos.setposition(4,map(degree,0,1000,700,1600));
   if(servo == 5)
