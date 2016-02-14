@@ -12,6 +12,7 @@ void setup() {
   {
     servos.setbounds(servo,0,3000);
     servos.setposition(servo, 1500);      //Set the initial position of the servo
+    Serial.println(servos.getposition(servo));
   }
 
 //  servos.setbounds(0, 0, 5000);

@@ -2,7 +2,7 @@ import serial
 import math
 import time
 
-ser = serial.Serial('/dev/cu.usbserial-AL00WV7V', 9600)
+ser = serial.Serial('/dev/cu.usbserial-AL00WTYH', 9600)
 # ser.write("1,1000");
 
 def sendDegree(zero,one,two,three,four,five):
@@ -11,6 +11,7 @@ def sendDegree(zero,one,two,three,four,five):
     print(message)
 
 
+# def open():
 
 
 
@@ -50,18 +51,6 @@ currenty = 20
 
 time.sleep(2)
 moveDirectly(currentx,currenty)
-
-def moveTo(x,y):
-    global currentx
-    global currenty
-    yi = y - (currenty + 0.00)
-    xi = x - (currentx + 0.00)
-
-    for i in range(100):
-        currenty += (yi/100.0)
-        currentx += (xi/100.0)
-        moveDirectly(currentx,currenty)
-        time.sleep(0.05)
 
 
 # sendDegree(1,1200)
