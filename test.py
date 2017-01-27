@@ -1,7 +1,16 @@
+import Tkinter as tk
+from Tkinter import *
+root = tk.Tk()
 import serial
 import math
 import time
 import threading
+
+
+
+
+
+
 
 ser = serial.Serial('/dev/cu.usbserial-A70365JW', 38400, timeout=1)
 
@@ -78,7 +87,7 @@ def mv(xDistance, yDistance):
         grab = 0
 
     if movedup:
-        angleB += 30
+        angleB += 10
 
     p1 = math.ceil(((rotation / 90)*500 + 500)*100)/100
     p2 = math.ceil(((angleB / 90.0) * 500)*100)/100
@@ -136,19 +145,29 @@ def draw():
 
 
 
-
-# def moveSmoothly(xDistance, yDistance):
-#     originx = lastx
-#     originy = lasty
-#     xDis = xDistance - lastx
-#     yDis = yDistance - lasty
-#     print yDis
-#     smoothness = 10
-#     for i in range(1,smoothness+1):
-#         mv(originx + xDis*(i/(smoothness*1.0)), originy + yDis*(i/(smoothness*1.0)))
-#         time.sleep(1.5)
+mv(0,10)
 
 
 
+def callback(event):
+    mt()
 
-# sendDegree(1,1200)
+def callback2(event):
+    gt()
+
+frame = Frame(root, width=1500, height=700)
+frame.bind("<Button-1>", callback)
+frame.bind("<Button-2>", callback2)
+frame.pack()
+
+lasttime = time.time()
+def motion(event):
+    global lasttime
+    if time.time() > lasttime + 0.1:
+        lasttime = time.time()
+        x = ((event.x / 1300.0) * 14 - 7) * -1
+        y = (event.y / 700.0)*10 + 3
+        mv(x,y)
+
+frame.bind('<Motion>', motion)
+root.mainloop()
